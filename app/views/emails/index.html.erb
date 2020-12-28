@@ -1,0 +1,29 @@
+<h1 class="toggle">Hello world!</h1>
+
+
+
+<div class="shopify">
+  <ol>
+  <% @webhooks.each do |w| %>
+    <% @mecury_info = mercury_formatted(w.body) %>
+      <ul style="list-style: none;padding-left: 0;margin-bottom:50px;">
+        <% @mecury_info.each do |k, v| %>
+        <li style="color:blue;"><%= k %>: <span style="color:green"><%= v %></span></li>
+        <% end %>
+      </ul>
+  <% end %>
+  </ol>
+</div>
+
+<div class="ajax" style="display:none;">
+  <ol>
+  <% @ajax.each do |a| %>
+    <% @mecury_info = ajax_mercury_formatted(a.body, false) %>
+      <ul style="list-style: none;padding-left: 0;margin-bottom:50px;">
+        <% @mecury_info.each do |k, v| %>
+        <li style="color:blue;"><%= k %>: <span style="color:green"><%= v %></span></li>
+        <% end %>
+      </ul>
+  <% end %>
+  </ol> 
+</div>
