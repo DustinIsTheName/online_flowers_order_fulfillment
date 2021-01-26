@@ -122,7 +122,7 @@ module ApplicationHelper
 
     if order_body['payment_details']
       order_to_mercury["CC Company"] = order_body['payment_details']['credit_card_company']
-      order_to_mercury["CC Number"] = order_body['payment_details']['credit_card_number']
+      order_to_mercury["CC Number"] = order_body['payment_details']['credit_card_number'].gsub('•', '*')
     else
       order_to_mercury["CC Company"] = 'Paypal'
       order_to_mercury["CC Number"] = ''
