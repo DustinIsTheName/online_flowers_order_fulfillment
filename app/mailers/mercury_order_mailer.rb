@@ -5,7 +5,11 @@ class MercuryOrderMailer < ApplicationMailer
   # default to: 'dustin@wittycreative.com'
   default_email = ENV["EMAIL"].blank? ? 'mercury2@onlineflowersorders.com' : ENV["EMAIL"]
 
-  default to: default_email
+  if Rails.env.development?
+    default to: "dustin@wittycreative.com"
+  else
+    default to: default_email
+  end
 
   def send_order(body)
     default_from_email = ENV["FROM_EMAIL"].blank? ? 'no-reply@onlineflowers.com' : ENV["FROM_EMAIL"]

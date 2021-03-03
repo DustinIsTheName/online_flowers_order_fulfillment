@@ -5,7 +5,10 @@ module ApplicationHelper
     $misc_prods = []
 
     for line in order_body['line_items']
-      if line['properties']
+
+      is_flower = line['properties']&.select{|p| p["name"] == "is_flower"}.first
+
+      if is_flower
         $main_product = line
         $main_product['properties_object'] = {}
 

@@ -1,4 +1,2 @@
 <% @mecury_info = ajax_mercury_formatted(@body, true) %>
-<% @mecury_info.each do |k, v| %>
-<%= k %>:<%= v %>
-<% end %>
+<% @mecury_info.each do |k, v| %><%= k %>:<%= v %><%= "\n" %><% end %>
