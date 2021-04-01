@@ -3,7 +3,7 @@ class MercuryOrderMailer < ApplicationMailer
 
   # default to: 'mercury@onlineflowersorders.com'
   # default to: 'dustin@wittycreative.com'
-  default_email = ENV["EMAIL"].blank? ? 'mercury2@onlineflowersorders.com' : ENV["EMAIL"]
+  default_email = ENV["EMAIL"].blank? ? 'mercury@onlineflowersorders.com' : ENV["EMAIL"]
 
   if Rails.env.development?
     default to: "dustin@wittycreative.com"

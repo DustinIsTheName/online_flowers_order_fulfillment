@@ -149,6 +149,8 @@ module ApplicationHelper
     order_to_mercury["Tax Amount"] = order_body['total_tax']
     order_to_mercury["Total Order Amount"] = order_body['total_price']
 
+    order_to_mercury = order_to_mercury.map { |k, v| [k, sanitize(v)] }.to_h
+
     Hash[order_to_mercury.sort]
 
   end
@@ -233,6 +235,8 @@ module ApplicationHelper
 
     create_order(order_to_mercury, order_from_ajax, prop) if send_order
 
+    order_to_mercury = order_to_mercury.map { |k, v| [k, sanitize(v)] }.to_h
+
     order_to_mercury
 
   end
@@ -304,6 +308,30 @@ module ApplicationHelper
 
     shopify_order.save
 
+  end
+
+  def sanitize(string)
+    replacements = { 
+      'á' => "a",
+      'ë' => 'e',
+      'í' => 'i',
+      'ñ' => 'n',
+    }
+
+    encoding_options = {
+      :invalid   => :replace,     # Replace invalid byte sequences
+      :replace => "",             # Use a blank for those replacements
+      :universal_newline => true, # Always break lines with \n
+      # For any character that isn't defined in ASCII, run this
+      # code to find out how to replace it
+      :fallback => lambda { |char|
+        # If no replacement is specified, use an empty string
+        replacements.fetch(char, "")
+      },
+    }
+    if string.class.to_s == "String"
+      string&.encode(Encoding.find('ASCII'), encoding_options)
+    end
   end
 
 end
